@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Search Opportunity Calculator | Pioneerly</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 py-12 px-4">
+    <div class="max-w-5xl mx-auto">
+        
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mb-6">
+                <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+            </div>
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">
+                AI Search Opportunity Calculator
+            </h1>
+            <p class="text-xl text-blue-600 max-w-3xl mx-auto">
+                Discover how AI search optimization could impact your firm's lead generation based on your practice area, current traffic, and target clients.
+            </p>
+        </div>
+
+        <!-- Input Form -->
+        <div class="bg-white rounded-xl shadow-sm p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Your Firm Profile</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-base font-medium text-gray-900 mb-3">
+                        Primary Practice Area
+                    </label>
+                    <select id="practiceArea" class="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select your practice area</option>
+                        <option value="personal-injury">Personal Injury</option>
+                        <option value="family">Family Law</option>
+                        <option value="criminal">Criminal Defense</option>
+                        <option value="estate">Estate Planning</option>
+                        <option value="corporate">Corporate/Business Law</option>
+                        <option value="immigration">Immigration</option>
+                        <option value="real-estate">Real Estate</option>
+                        <option value="ip">Intellectual Property</option>
+                        <option value="employment">Employment Law</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-base font-medium text-gray-900 mb-3">
+                        Target Client Demographics
+                    </label>
+                    <select id="clientAge" class="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select primary age group</option>
+                        <option value="25-35">25-35 (Tech-savvy, high AI usage)</option>
+                        <option value="35-50">35-50 (Mixed traditional/AI search)</option>
+                        <option value="50+">50+ (Primarily traditional search)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-base font-medium text-gray-900 mb-3">
+                        Current Monthly Organic Traffic
+                    </label>
+                    <select id="currentTraffic" class="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select traffic range</option>
+                        <option value="0-500">0-500 visitors/month</option>
+                        <option value="500-1500">500-1,500 visitors/month</option>
+                        <option value="1500-3000">1,500-3,000 visitors/month</option>
+                        <option value="3000-5000">3,000-5,000 visitors/month</option>
+                        <option value="5000+">5,000+ visitors/month</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-base font-medium text-gray-900 mb-3">
+                        Current SEO Performance
+                    </label>
+                    <select id="seoPerformance" class="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Rate your current SEO</option>
+                        <option value="none">No SEO strategy</option>
+                        <option value="basic">Basic SEO (some content, basic optimization)</option>
+                        <option value="good">Good SEO (regular content, ranking for some keywords)</option>
+                        <option value="excellent">Excellent SEO (top 3 rankings for primary keywords)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-base font-medium text-gray-900 mb-3">
+                        Monthly Marketing Budget
+                    </label>
+                    <select id="budget" class="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select budget range</option>
+                        <option value="0-1000">$0-1,000/month</option>
+                        <option value="1000-3000">$1,000-3,000/month</option>
+                        <option value="3000-5000">$3,000-5,000/month</option>
+                        <option value="5000-8000">$5,000-8,000/month</option>
+                        <option value="8000+">$8,000+/month</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-base font-medium text-gray-900 mb-3">
+                        Average Case Value ($)
+                    </label>
+                    <input
+                        type="number"
+                        id="caseValue"
+                        class="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="e.g., 5000"
+                    />
+                </div>
+            </div>
+
+            <button
+                id="calculateBtn"
+                class="w-full mt-8 bg-blue-600 text-white py-4 px-6 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+            >
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                Calculate My AI Search Opportunity
+            </button>
+        </div>
+
+        <!-- Results Section (Hidden by default) -->
+        <div id="resultsSection" class="hidden space-y-8">
+            
+            <!-- Opportunity Score -->
+            <div class="bg-white rounded-xl shadow-sm p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900">Your AI Search Opportunity Score</h3>
+                    <div class="text-right">
+                        <div class="text-5xl font-bold text-blue-600" id="opportunityScore">0</div>
+                        <div class="text-sm text-gray-600 mt-1">out of 100</div>
+                    </div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                    <div id="scoreBar" class="bg-blue-600 h-3 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                </div>
+                <p id="scoreDescription" class="text-base text-gray-700"></p>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <p class="text-sm font-medium text-gray-600 mb-2">Potential Additional Leads/Month</p>
+                    <p class="text-4xl font-bold text-gray-900" id="additionalLeads">0</p>
+                    <p class="text-sm text-gray-500 mt-2">From AI search optimization</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <p class="text-sm font-medium text-gray-600 mb-2">Estimated Annual Revenue Impact</p>
+                    <p class="text-4xl font-bold text-gray-900" id="revenueImpact">$0</p>
+                    <p class="text-sm text-gray-500 mt-2">Based on higher conversion rates</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <p class="text-sm font-medium text-gray-600 mb-2">Timeline to Results</p>
+                    <p class="text-4xl font-bold text-gray-900"><span id="timeline">0</span> mo</p>
+                    <p class="text-sm text-gray-500 mt-2">Months to see meaningful impact</p>
+                </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="bg-white rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Your Personalized Recommendations</h3>
+                <div id="recommendations" class="space-y-4">
+                    <!-- Recommendations will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Strategy Roadmap -->
+            <div class="bg-blue-50 rounded-xl p-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Your AI Search Strategy Roadmap</h3>
+                <div id="roadmap" class="space-y-4">
+                    <!-- Roadmap will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Investment Analysis -->
+            <div class="bg-white rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Investment Analysis</h3>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-semibold text-lg text-gray-900 mb-4">Recommended Monthly Investment</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-gray-700">Content Creation (AEO-optimized)</span>
+                                <span class="font-semibold text-lg" id="contentCost">$0</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-gray-700">Technical Implementation</span>
+                                <span class="font-semibold text-lg" id="techCost">$0</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-gray-700">Monitoring & Optimization</span>
+                                <span class="font-semibold text-lg" id="monitoringCost">$0</span>
+                            </div>
+                            <div class="border-t-2 pt-3 mt-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-bold text-gray-900 text-lg">Total Monthly Investment</span>
+                                    <span class="font-bold text-blue-600 text-2xl" id="totalInvestment">$0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold text-lg text-gray-900 mb-4">Expected ROI</h4>
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 rounded-lg p-5">
+                                <p class="text-sm text-gray-600 mb-2">12-Month ROI</p>
+                                <p class="text-3xl font-bold text-blue-600" id="roi12">0:1</p>
+                            </div>
+                            <div class="bg-indigo-50 rounded-lg p-5">
+                                <p class="text-sm text-gray-600 mb-2">24-Month ROI</p>
+                                <p class="text-3xl font-bold text-indigo-600" id="roi24">0:1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                    <p class="text-sm text-gray-700">
+                        <span class="font-semibold">Important:</span> These projections assume consistent implementation and optimization. Actual results vary based on content quality, technical execution, and market competition.
+                    </p>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="bg-blue-600 rounded-xl p-8 text-center text-white">
+                <h3 class="text-2xl font-bold mb-3">Ready to Capture AI Search Opportunities?</h3>
+                <p class="text-lg mb-6 text-blue-100">
+                    Get personalized guidance on implementing your AI search strategy, plus weekly insights in The Case for Growth newsletter.
+                </p>
+                <button
+                    id="showEmailForm"
+                    class="bg-white text-blue-600 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-50 transition-colors inline-flex items-center gap-2"
+                >
+                    Get My Personalized Strategy
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Email Form (Hidden) -->
+            <div id="emailForm" class="hidden bg-white rounded-xl shadow-sm p-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Get Your Personalized AI Search Strategy</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-base font-medium text-gray-900 mb-2">Email Address</label>
+                        <input type="email" id="userEmail" placeholder="your.email@lawfirm.com" class="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                    </div>
+                    <div>
+                        <label class="block text-base font-medium text-gray-900 mb-2">Firm Name (Optional)</label>
+                        <input type="text" id="firmName" placeholder="Your Law Firm" class="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+                    </div>
+                    <button id="submitEmail" class="w-full bg-blue-600 text-white py-4 px-6 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors">
+                        Send Me My Strategy + Subscribe to Newsletter
+                    </button>
+                    <p class="text-sm text-gray-500 text-center">
+                        You'll get your personalized roadmap immediately, plus join 500+ attorneys receiving weekly growth strategies.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Note -->
+        <div class="text-center text-base text-gray-500 mt-8">
+            <p>All calculations are performed locally. Your data is not stored or shared.</p>
+        </div>
+    </div>
+
+    <script>
+        const inputs = {
+            practiceArea: document.getElementById('practiceArea'),
+            clientAge: document.getElementById('clientAge'),
+            currentTraffic: document.getElementById('currentTraffic'),
+            seoPerformance: document.getElementById('seoPerformance'),
+            budget: document.getElementById('budget'),
+            caseValue: document.getElementById('caseValue')
+        };
+
+        const calculateBtn = document.getElementById('calculateBtn');
+        const resultsSection = document.getElementById('resultsSection');
+        const showEmailFormBtn = document.getElementById('showEmailForm');
+        const emailForm = document.getElementById('emailForm');
+
+        // Scoring logic
+        const practiceAreaScores = {
+            'personal-injury': { aiPotential: 40, timeline: 10 },
+            'family': { aiPotential: 55, timeline: 8 },
+            'criminal': { aiPotential: 50, timeline: 9 },
+            'estate': { aiPotential: 75, timeline: 7 },
+            'corporate': { aiPotential: 85, timeline: 6 },
+            'immigration': { aiPotential: 70, timeline: 7 },
+            'real-estate': { aiPotential: 60, timeline: 8 },
+            'ip': { aiPotential: 90, timeline: 5 },
+            'employment': { aiPotential: 80, timeline: 6 }
+        };
+
+        const clientAgeScores = {
+            '25-35': 30,
+            '35-50': 20,
+            '50+': 5
+        };
+
+        const trafficScores = {
+            '0-500': 5,
+            '500-1500': 10,
+            '1500-3000': 15,
+            '3000-5000': 20,
+            '5000+': 25
+        };
+
+        const seoScores = {
+            'none': 30,
+            'basic': 25,
+            'good': 15,
+            'excellent': 5
+        };
+
+        function calculateOpportunity() {
+            const practiceArea = inputs.practiceArea.value;
+            const clientAge = inputs.clientAge.value;
+            const currentTraffic = inputs.currentTraffic.value;
+            const seoPerformance = inputs.seoPerformance.value;
+            const budget = inputs.budget.value;
+            const caseValue = parseFloat(inputs.caseValue.value) || 0;
+
+            // Calculate opportunity score (0-100)
+            let score = 0;
+            score += practiceAreaScores[practiceArea]?.aiPotential || 0;
+            score += clientAgeScores[clientAge] || 0;
+            score += trafficScores[currentTraffic] || 0;
+            score += seoScores[seoPerformance] || 0;
+
+            // Estimate additional leads
+            const trafficMidpoint = {
+                '0-500': 250,
+                '500-1500': 1000,
+                '1500-3000': 2250,
+                '3000-5000': 4000,
+                '5000+': 6000
+            };
+
+            const traffic = trafficMidpoint[currentTraffic] || 1000;
+            const aiBoost = (score / 100) * 0.02;
+            const additionalLeads = Math.round(traffic * aiBoost);
+
+            // Calculate revenue impact
+            const leadConversionRate = 0.50;
+            const monthlyRevenue = additionalLeads * leadConversionRate * caseValue;
+            const annualRevenue = monthlyRevenue * 12;
+
+            // Timeline
+            const timeline = practiceAreaScores[practiceArea]?.timeline || 8;
+
+            // Investment recommendations
+            const budgetRange = {
+                '0-1000': { content: 500, tech: 200, monitoring: 100 },
+                '1000-3000': { content: 1500, tech: 500, monitoring: 300 },
+                '3000-5000': { content: 2500, tech: 800, monitoring: 500 },
+                '5000-8000': { content: 3500, tech: 1000, monitoring: 700 },
+                '8000+': { content: 4500, tech: 1500, monitoring: 1000 }
+            };
+
+            const investment = budgetRange[budget] || budgetRange['1000-3000'];
+            const totalMonthly = investment.content + investment.tech + investment.monitoring;
+
+            // ROI calculations
+            const roi12 = monthlyRevenue > 0 ? (monthlyRevenue * 12) / (totalMonthly * 12) : 0;
+            const roi24 = monthlyRevenue > 0 ? (monthlyRevenue * 24 * 1.3) / (totalMonthly * 24) : 0;
+
+            // Display results
+            document.getElementById('opportunityScore').textContent = score;
+            document.getElementById('scoreBar').style.width = score + '%';
+            document.getElementById('additionalLeads').textContent = additionalLeads;
+            document.getElementById('revenueImpact').textContent = '$' + Math.round(annualRevenue).toLocaleString();
+            document.getElementById('timeline').textContent = timeline;
+
+            document.getElementById('contentCost').textContent = '$' + investment.content.toLocaleString();
+            document.getElementById('techCost').textContent = '$' + investment.tech.toLocaleString();
+            document.getElementById('monitoringCost').textContent = '$' + investment.monitoring.toLocaleString();
+            document.getElementById('totalInvestment').textContent = '$' + totalMonthly.toLocaleString();
+
+            document.getElementById('roi12').textContent = roi12.toFixed(1) + ':1';
+            document.getElementById('roi24').textContent = roi24.toFixed(1) + ':1';
+
+            // Score description
+            let scoreDesc = '';
+            if (score >= 75) {
+                scoreDesc = '🔥 Excellent opportunity! Your practice area, client demographics, and current position make AI search optimization highly valuable.';
+            } else if (score >= 50) {
+                scoreDesc = '✅ Good opportunity. AI search optimization could significantly impact your lead generation.';
+            } else if (score >= 30) {
+                scoreDesc = '⚠️ Moderate opportunity. Focus on traditional SEO first, then layer in AI optimization.';
+            } else {
+                scoreDesc = '📊 Lower priority. Traditional SEO and local search should be your primary focus for now.';
+            }
+            document.getElementById('scoreDescription').textContent = scoreDesc;
+
+            // Generate recommendations
+            generateRecommendations(score, practiceArea, seoPerformance, clientAge, budget);
+
+            // Generate roadmap
+            generateRoadmap(timeline, seoPerformance, score);
+
+            // Show results
+            resultsSection.classList.remove('hidden');
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function generateRecommendations(score, practiceArea, seoPerformance, clientAge, budget) {
+            const recommendations = document.getElementById('recommendations');
+            recommendations.innerHTML = '';
+
+            const recs = [];
+
+            if (score >= 60) {
+                recs.push({
+                    priority: 'high',
+                    title: 'Start AEO Implementation Immediately',
+                    description: 'Your profile shows high AI search potential. Begin restructuring your top 5 pages for AI readability and create 3-5 comprehensive, FAQ-rich guides in the next 60 days.'
+                });
+            }
+
+            if (seoPerformance === 'excellent') {
+                recs.push({
+                    priority: 'high',
+                    title: 'Layer AI Optimization on Strong SEO Foundation',
+                    description: 'Your strong SEO performance is a perfect foundation. Add extensive FAQ sections to your top-ranking pages and implement comprehensive schema markup.'
+                });
+            } else if (seoPerformance === 'none' || seoPerformance === 'basic') {
+                recs.push({
+                    priority: 'medium',
+                    title: 'Build Dual-Optimized Content from the Start',
+                    description: 'Since you\'re building your content strategy, create content optimized for both traditional SEO and AI search from day one.'
+                });
+            }
+
+            if (clientAge === '25-35') {
+                recs.push({
+                    priority: 'high',
+                    title: 'Prioritize Conversational Content Format',
+                    description: 'Your target demographic (25-35) has the highest AI search usage. Structure content to answer detailed, conversational queries.'
+                });
+            }
+
+            recs.forEach((rec, index) => {
+                const priorityColors = {
+                    'high': 'bg-red-50 border-red-200 text-red-800',
+                    'medium': 'bg-yellow-50 border-yellow-200 text-yellow-800',
+                    'low': 'bg-blue-50 border-blue-200 text-blue-800'
+                };
+
+                const div = document.createElement('div');
+                div.className = 'border-l-4 border-blue-600 bg-gray-50 p-4';
+                div.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0">
+                            <span class="inline-block px-2 py-1 text-xs font-semibold rounded ${priorityColors[rec.priority]}">${rec.priority.toUpperCase()}</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-1">${rec.title}</h4>
+                            <p class="text-sm text-gray-700">${rec.description}</p>
+                        </div>
+                    </div>
+                `;
+                recommendations.appendChild(div);
+            });
+        }
+
+        function generateRoadmap(timeline, seoPerformance, score) {
+            const roadmap = document.getElementById('roadmap');
+            roadmap.innerHTML = '';
+
+            const phases = [
+                { month: '1-3', title: 'Foundation', tasks: ['Audit existing content', 'Add FAQ sections to top pages', 'Implement schema markup', 'Create first 2-3 comprehensive guides'] },
+                { month: '4-6', title: 'Build', tasks: ['Publish 2 guides per month', 'Optimize author bios', 'Monitor direct traffic increases', 'Test AI tool citations'] },
+                { month: '7-9', title: 'Scale', tasks: ['Expand to 3-4 guides per month', 'Cross-link content strategically', 'Refine based on performance data', 'Build topical authority'] },
+                { month: '10-12', title: 'Optimize', tasks: ['Review what\'s working', 'Double down on high-performers', 'Measure ROI', 'Plan year 2 strategy'] }
+            ];
+
+            phases.forEach((phase, index) => {
+                const div = document.createElement('div');
+                div.className = 'flex gap-4';
+                div.innerHTML = `
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
+                            ${index + 1}
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-semibold text-lg text-gray-900 mb-1">Months ${phase.month}: ${phase.title}</h4>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            ${phase.tasks.map(task => `<li>• ${task}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                roadmap.appendChild(div);
+            });
+        }
+
+        // Event listeners
+        calculateBtn.addEventListener('click', () => {
+            const allFilled = Object.values(inputs).every(input => input.value !== '');
+            if (allFilled) {
+                calculateResults();
+            }
+        });
+
+        showEmailFormBtn.addEventListener('click', () => {
+            emailForm.classList.remove('hidden');
+            emailForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        document.getElementById('submitEmail').addEventListener('click', () => {
+            const email = document.getElementById('userEmail').value;
+            if (email) {
+                alert('Thank you! Check your email for your personalized strategy.');
+            } else {
+                alert('Please enter your email address.');
+            }
+        });
+
+        // Enable/disable button
+        Object.values(inputs).forEach(input => {
+            input.addEventListener('input', () => {
+                const allFilled = Object.values(inputs).every(input => input.value !== '');
+                calculateBtn.disabled = !allFilled;
+            });
+        });
+    </script>
+</body>
+</html>
